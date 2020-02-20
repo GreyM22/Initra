@@ -186,7 +186,7 @@
 						<div class="col-lg-7">
 							<div class="right_contact_form">
 								<h4>Send a message for us</h4>
-								<form class="row contact_us_form js-form">
+								<form method="post" action="" id="contact-form" class="row contact_us_form js-form">
 									<div class="form-group col-md-6">
 										<input type="text" class="form-control" id="name" name="name" placeholder="Adam Warlock" required>
 									</div>
@@ -332,6 +332,36 @@
         <!-- contact js -->
         <script src="js/jquery.validate.min.js"></script>
         
-        <script src="js/theme.js"></script>
+		<script src="js/theme.js"></script>
+		<script>
+			function getFormDataString(formEl) {
+				var formData = new FormData(formEl),
+					data = [];
+	
+				for (var keyValue of formData) {
+					data.push(encodeURIComponent(keyValue[0]) + "=" + encodeURIComponent(keyValue[1]));
+				}
+	
+				return data.join("&");
+			}
+	
+	
+			var form = document.getElementById("contact-form");
+	
+			form.addEventListener("submit", function (e) {
+				e.preventDefault();
+	
+				let request = new XMLHttpRequest();
+	
+				request.addEventListener("load", function () {
+					if (request.status === 302) { // CloudCannon redirects on success
+					}
+				});
+				request.open(form.method, form.action);
+				request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				request.send(getFormDataString(form));
+				$('.success-message').show();
+			})
+		</script>	
     </body>
 </html>

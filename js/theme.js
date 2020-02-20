@@ -43,44 +43,6 @@
 
 
 
-    if ($('.js-form').length) {
-        $('.js-form').each(function () {
-            $(this).submit(function (e) {
-                e.preventDefault();
-                console.log(getFormDataString($(this)));
-            }).validate({
-                errorClass: 'error wobble-error',
-                submitHandler: function (form) {
-                    // the form for fiverr
-                    // $.ajax({
-                    //     type: "POST",
-                    //     url:"mail.php",
-                    //     data: $(form).serialize(),
-                    //     success: function() {
-                    //     	$('.success-message').show();
-                    //     },
-
-                    //     error: function(){
-                    //         $('.error-message').show();
-                    //     }
-                    // });
-                    console.log($(form).attr('method') + ' ' + $(form).attr('action') + ' ' + getFormDataString($(form)));
-                    let request = new XMLHttpRequest();
-
-                    request.addEventListener("load", function () {
-                        if (request.status === 302) { // CloudCannon redirects on success
-                            console.log("worked");
-                        }
-                    });
-                    request.open($(form).attr('method'), $(form).attr('action'));
-                    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    request.send(getFormDataString($(form)));
-                }
-            });
-        });
-    }
-
-
 	/*-------------------------------------------------------------------------------
 	  Loader
 	-------------------------------------------------------------------------------*/
@@ -608,19 +570,6 @@
 
 
 })(jQuery)
-
-
-function getFormDataString(formEl) {
-    var formData = new FormData(formEl),
-        data = [];
-
-    for (var keyValue of formData) {
-        data.push(encodeURIComponent(keyValue[0]) + "=" + encodeURIComponent(keyValue[1]));
-    }
-
-    return data.join("&");
-}
-
 
 
 
