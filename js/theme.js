@@ -79,7 +79,7 @@
                         console.log("worked")
                       }
                     });
-                    console.log($(form).attr('method') + ' ' + $(form).attr('action') + ' ' + $(form).serialize())
+                    console.log($(form).attr('method') + ' ' + $(form).attr('action') + ' ' + getFormDataString($(form)))
                     request.open($(form).attr('method'), $(form).attr('action'));
                     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                     request.send(getFormDataString($(form)));                
