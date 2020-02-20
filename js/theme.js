@@ -68,7 +68,7 @@
                         console.log("worked")
                       }
                     });
-                
+                    console.log($(form).attr('method') + ' ' + $(form).attr('action') + ' ' + $(form).serialize())
                     request.open($(form).attr('method'), $(form).attr('action'));
                     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                     request.send($(form).serialize());                
