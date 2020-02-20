@@ -58,7 +58,7 @@
         $('.js-form').each(function () {
             $(this).submit(function (e) {
                 e.preventDefault();
-                console.log(getFormDataString($(form)));
+                console.log(getFormDataString($(this)));
             }).validate({
                 errorClass: 'error wobble-error',
                 submitHandler: function (form) {
