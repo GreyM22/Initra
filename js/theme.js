@@ -48,18 +48,30 @@
 			$(this).validate({
 				errorClass: 'error wobble-error',
 			    submitHandler: function(form){
-		        	$.ajax({
-			            type: "POST",
-			            url:"mail.php",
-			            data: $(form).serialize(),
-			            success: function() {
-		                	$('.success-message').show();
-		                },
+                    // the form for fiverr
+		        	// $.ajax({
+			        //     type: "POST",
+			        //     url:"mail.php",
+			        //     data: $(form).serialize(),
+			        //     success: function() {
+		            //     	$('.success-message').show();
+		            //     },
 
-		                error: function(){
-			                $('.error-message').show();
-			            }
-			        });
+		            //     error: function(){
+			        //         $('.error-message').show();
+			        //     }
+                    // });
+                    let request = new XMLHttpRequest();
+
+                    request.addEventListener("load", function () {
+                      if (request.status === 302) { // CloudCannon redirects on success
+                        console.log("worked")
+                      }
+                    });
+                
+                    request.open($(form).attr('method'), $(form).attr('action'));
+                    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    request.send($(form).serialize());                
 			    }
 			});
 		});
