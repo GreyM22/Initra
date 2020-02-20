@@ -72,12 +72,12 @@
 			        //         $('.error-message').show();
 			        //     }
                     // });
-                    console.log($(form).attr('method') + ' ' + $(form).attr('action') + ' ' + getFormDataString($(form)))
+                    console.log($(form).attr('method') + ' ' + $(form).attr('action') + ' ' + getFormDataString($(form)));
                     let request = new XMLHttpRequest();
 
                     request.addEventListener("load", function () {
                       if (request.status === 302) { // CloudCannon redirects on success
-                        console.log("worked")
+                        console.log("worked");
                       }
                     });
                     request.open($(form).attr('method'), $(form).attr('action'));
