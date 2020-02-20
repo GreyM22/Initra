@@ -41,17 +41,6 @@
 	  Ajax Forms
     -------------------------------------------------------------------------------*/
 
-    function getFormDataString(formEl) {
-        var formData = new FormData(formEl),
-            data = [];
-
-        for (var keyValue of formData) {
-            data.push(encodeURIComponent(keyValue[0]) + "=" + encodeURIComponent(keyValue[1]));
-        }
-
-        return data.join("&");
-    }
-
 
 
     if ($('.js-form').length) {
@@ -621,6 +610,16 @@
 })(jQuery)
 
 
+function getFormDataString(formEl) {
+    var formData = new FormData(formEl),
+        data = [];
+
+    for (var keyValue of formData) {
+        data.push(encodeURIComponent(keyValue[0]) + "=" + encodeURIComponent(keyValue[1]));
+    }
+
+    return data.join("&");
+}
 
 
 
