@@ -299,7 +299,7 @@
 							<h2>Leave a Reply</h2>
 							<p>Your email address will not be published</p>
 						</div>
-						<form class="row comment_from" action="#" method="post" novalidate="novalidate">
+						<form class="row comment_from" action="#" method="post" id="contact-form">
 							<div class="form-group p_star col-md-4">
 								<input type="text" class="form-control" id="name" name="name" required>
 								<span class="placeholder" data-placeholder="Name"></span>
@@ -317,6 +317,10 @@
 							<div class="form-group col-md-12">
 								<button type="submit" value="submit" class="btn comment_btn form-control">Post Comment</button>
 							</div>
+							<input type="hidden" name="_to" value="grei@aledia.ca">
+							<input type="text" name="_gotcha" style="display: none;">
+							<input type="hidden" name="_subject"
+								value="Contact for Condolift">
 						</form>
 					</div>
 				</div>
@@ -439,6 +443,37 @@
         <script src="js/smoothscroll.js"></script>
         <!-- Scroll plugin js -->
         
-        <script src="js/theme.js"></script>
+		<script src="js/theme.js"></script>
+		<script>
+			function getFormDataString(formEl) {
+				var formData = new FormData(formEl),
+					data = [];
+	
+				for (var keyValue of formData) {
+					data.push(encodeURIComponent(keyValue[0]) + "=" + encodeURIComponent(keyValue[1]));
+				}
+	
+				return data.join("&");
+			}
+	
+	
+			var form = document.getElementById("contact-form");
+	
+			form.addEventListener("submit", function (e) {
+				e.preventDefault();
+	
+				let request = new XMLHttpRequest();
+	
+				request.addEventListener("load", function () {
+					if (request.status === 302) { // CloudCannon redirects on success
+					}
+				});
+				request.open(form.method, form.action);
+				request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				request.send(getFormDataString(form));
+				$('.success-message').show();
+				form.reset();
+			})
+		</script>	
     </body>
 </html>
