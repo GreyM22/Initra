@@ -39,7 +39,18 @@
 	
 	/*-------------------------------------------------------------------------------
 	  Ajax Forms
-	-------------------------------------------------------------------------------*/
+    -------------------------------------------------------------------------------*/
+    
+    function getFormDataString(formEl) {
+        var formData = new FormData(formEl),
+            data = [];
+
+        for (var keyValue of formData) {
+            data.push(encodeURIComponent(keyValue[0]) + "=" + encodeURIComponent(keyValue[1]));
+        }
+
+        return data.join("&");
+    }
 
 
 
@@ -71,7 +82,7 @@
                     console.log($(form).attr('method') + ' ' + $(form).attr('action') + ' ' + $(form).serialize())
                     request.open($(form).attr('method'), $(form).attr('action'));
                     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    request.send($(form).serialize());                
+                    request.send(getFormDataString($(form)));                
 			    }
 			});
 		});
